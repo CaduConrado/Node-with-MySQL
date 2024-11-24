@@ -5,6 +5,10 @@
         <p>Páginas: {{book.pages}}</p>
         <p>Autor: {{book.author}}</p>
         <p>Editora: {{book.publisher}}</p>
+        <a href="books/edit/{{this.id}}">Editar</a>
+        <form action="/books/remove/{{book.id}}" method="POST">
+            <input type="submit" value="Remover">
+        </form>
     </div>
 </div>
 
