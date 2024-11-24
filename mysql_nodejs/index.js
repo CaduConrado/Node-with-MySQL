@@ -24,8 +24,18 @@ app.post("/books/addBook", (req, res) => {
   const pages = req.body.pages;
   const publisher = req.body.publisher;
 
-  const sql = `INSERT INTO books (title, author, pages, publisher) VALUES ("${title}", "${author}", "${pages}", "${publisher}")`;
-  conn.query(sql, function (err) {
+  const sql = `INSERT INTO books (??, ??, ??, ??) VALUES (?, ?, ?, ?)`;
+  const data = [
+    "title",
+    "author",
+    "pages",
+    "publisher",
+    title,
+    author,
+    pages,
+    publisher,
+  ];
+  conn.query(sql, data, function (err) {
     if (err) {
       console.log(err);
     }
@@ -52,9 +62,9 @@ app.get("/books", (req, res) => {
 
 app.get("/books/:id", (req, res) => {
   const id = req.params.id;
-  const sql = `SELECT * FROM books WHERE id = ${id}`;
-
-  conn.query(sql, function (err, data) {
+  const sql = `SELECT * FROM books WHERE ?? = ?`;
+  const data = ["id", id];
+  conn.query(sql, data, function (err, data) {
     if (err) {
       console.log(err);
       return;
@@ -68,9 +78,9 @@ app.get("/books/:id", (req, res) => {
 app.get("/books/edit/:id", (req, res) => {
   const id = req.params.id;
 
-  const sql = `SELECT * FROM books WHERE id = ${id}`;
-
-  conn.query(sql, function (err, data) {
+  const sql = `SELECT * FROM books WHERE ?? = ?`;
+  const data = ["id", id];
+  conn.query(sql, data, function (err, data) {
     if (err) {
       console.log(err);
       return;
@@ -90,9 +100,20 @@ app.post("/books/updateBook", (req, res) => {
   const publisher = req.body.publisher;
   console.log(id);
 
-  const sql = `UPDATE books SET title = '${title}', author = '${author}', pages = '${pages}', publisher = '${publisher}' WHERE id = '${id}'`;
-
-  conn.query(sql, function (err) {
+  const sql = `UPDATE books SET ?? = ?, ?? = ?, ?? = ?, ?? = ? WHERE ?? = ?`;
+  const data = [
+    "title",
+    "author",
+    "pages",
+    "publisher",
+    "id",
+    title,
+    author,
+    pages,
+    publisher,
+    id,
+  ];
+  conn.query(sql, data, function (err) {
     if (err) {
       console.log(err);
       return;
@@ -105,9 +126,9 @@ app.post("/books/updateBook", (req, res) => {
 app.post("/books/remove/:id", (req, res) => {
   const id = req.params.id;
 
-  const sql = `DELETE FROM books WHERE id = ${id}`;
-
-  conn.query(sql, function (err) {
+  const sql = `DELETE FROM books WHERE ?? = ?`;
+  const data = ["id", id];
+  conn.query(sql, data, function (err) {
     if (err) {
       console.log(err);
     }
