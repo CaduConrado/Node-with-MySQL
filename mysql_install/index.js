@@ -50,6 +50,58 @@ app.get("/books", (req, res) => {
   });
 });
 
+app.get("/books/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = `SELECT * FROM books WHERE id = ${id}`;
+
+  conn.query(sql, function (err, data) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    const book = data[0];
+
+    res.render("book", { book });
+  });
+});
+
+app.get("/books/edit/:id", (req, res) => {
+  const id = req.params.id;
+
+  const sql = `SELECT * FROM books WHERE id = ${id}`;
+
+  conn.query(sql, function (err, data) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    const book = data[0];
+
+    res.render("editBook", { book });
+  });
+});
+
+app.post("/books/updateBook", (req, res) => {
+  const id = req.body.id;
+  const title = req.body.title;
+  const author = req.body.author;
+  const pages = req.body.pages;
+  const publisher = req.body.publisher;
+  console.log(id);
+
+  const sql = `UPDATE books SET title = '${title}', author = '${author}', pages = '${pages}', publisher = '${publisher}' WHERE id = '${id}'`;
+
+  conn.query(sql, function (err) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    res.redirect("/books");
+  });
+});
+
 const conn = mysql.createConnection({
   host: "localhost",
   user: "root",
