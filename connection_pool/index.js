@@ -1,7 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const pool = require("./db/conn");
-const { log } = require("handlebars/runtime");
 const app = express();
 const port = 3000;
 
