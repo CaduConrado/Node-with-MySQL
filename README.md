@@ -15,8 +15,8 @@ Certifique-se de ter o Node.js instalado em sua máquina. Clone o repositório e
 Make sure you have Node.js installed on your machine. Clone the repository and install the dependencies with the command below:
 
 ```bash
-git clone https://github.com/CaduConrado/Node-with-MySQL
 cd seu_repositorio
+git clone https://github.com/CaduConrado/Node-with-MySQL
 npm install
 ```
 
@@ -36,7 +36,7 @@ npm start
 
 ## Funcionalidades (Features)
 
-## 1. Cadastrar / Cadastar ## Account
+## 1. Cadastrar / Cadaster Account ##
 
 **Descrição**: Permite o usuário cadastrar um livro, informando o seu **Título**, **Autor**, **Número de Páginas** e **Editora**. 
 
